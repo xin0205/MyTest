@@ -1,0 +1,16 @@
+{
+    "name": "GameMain.Editor",
+    "references": [
+        "UnityGameFramework.Editor",
+        "GameFramework",
+        "GameMain"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
