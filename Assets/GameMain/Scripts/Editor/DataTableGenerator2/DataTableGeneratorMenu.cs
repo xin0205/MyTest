@@ -11,7 +11,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityGameFramework.Editor.DataTableTools2;
 
-namespace StarForce.Editor.DataTableTools2
+namespace Project.Editor.DataTableTools2
 {
     public sealed class DataTableGeneratorMenu
     {

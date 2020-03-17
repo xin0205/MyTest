@@ -5,7 +5,7 @@
 // Feedback: mailto:jiangyin@gameframework.cn
 //------------------------------------------------------------
 // 此文件由工具自动生成，请勿直接修改。
-// 生成时间：2020-03-15 20:20:13.763
+// 生成时间：2020-03-17 16:07:41.259
 //------------------------------------------------------------
 
 using GameFramework;
@@ -72,6 +72,24 @@ namespace Project
             private set;
         }
 
+        /// <summary>
+        /// 获取Goods。
+        /// </summary>
+        public Goods GoodsValue
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 获取Goods数组。
+        /// </summary>
+        public List<Goods> GoodsList
+        {
+            get;
+            private set;
+        }
+
         public override bool ParseDataRow(GameFrameworkSegment<string> dataRowSegment)
         {
             // Star Force 示例代码，正式项目使用时请调整此处的生成代码，以处理 GCAlloc 问题！
@@ -89,6 +107,8 @@ namespace Project
             IntList = DataTableExtension.ParseList<int>(columnTexts[index++], int.Parse);
             Vector2Value = DataTableExtension.ParseVector2(columnTexts[index++]);
             Vector2List = DataTableExtension.ParseList<Vector2>(columnTexts[index++], DataTableExtension.ParseVector2);
+            GoodsValue = Goods.Parse(columnTexts[index++]);
+            GoodsList = DataTableExtension.ParseList<Goods>(columnTexts[index++], Goods.Parse);
 
             GeneratePropertyArray();
             return true;
@@ -106,6 +126,8 @@ namespace Project
                     IntList = binaryReader.ReadList<int>(binaryReader.ReadInt32);
                     Vector2Value = binaryReader.ReadVector2();
                     Vector2List = binaryReader.ReadList<Vector2>(binaryReader.ReadVector2);
+                    GoodsValue = binaryReader.ReadGoods();
+                    GoodsList = binaryReader.ReadList<Goods>(binaryReader.ReadGoods);
                 }
             }
 

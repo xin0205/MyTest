@@ -70,6 +70,11 @@ namespace Project
 
         }
 
+        public static Goods ReadGoods(this BinaryReader binaryReader)
+        {
+            return new Goods(binaryReader.ReadInt32(), binaryReader.ReadInt32(), binaryReader.ReadInt32());
+        }
+
         //public static List<T> ReadEnumList<T>(this BinaryReader binaryReader) where T: Enum
         //{
 

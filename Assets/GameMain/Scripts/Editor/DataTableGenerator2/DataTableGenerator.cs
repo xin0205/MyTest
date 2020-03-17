@@ -13,8 +13,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityGameFramework.Editor.DataTableTools2;
+using DataTableProcessor2 = UnityGameFramework.Editor.DataTableTools2.DataTableProcessor;
 
-namespace StarForce.Editor.DataTableTools2
+namespace Project.Editor.DataTableTools2
 {
     public sealed class DataTableGenerator
     {
@@ -174,7 +175,7 @@ namespace StarForce.Editor.DataTableTools2
 
                     //stringBuilder.AppendFormat("            {0} = DataTableExtension.ParseList<{1}>(columnTexts[index++], {2}.Parse);", dataTableProcessor.GetName(i), dataTableProcessor.GetLanguageKeyword(i), dataTableProcessor.GetLanguageKeyword(i)).AppendLine();
 
-                    if (dataTableProcessor.IsSystem(i))
+                    if (dataTableProcessor.IsSystem(i) || dataTableProcessor.IsCustom(i))
                     {
 
                         if (languageKeyword == "string")
@@ -189,16 +190,14 @@ namespace StarForce.Editor.DataTableTools2
                     }
                     else if (dataTableProcessor.GetValueType(i) == DataType.Enum)
                     {
-                        //(str) => { return ({2})int.Parse(str); }
                         stringBuilder.AppendFormat("            {0} = DataTableExtension.ParseList<{1}>(columnTexts[index++], binaryReader.ReadEnum<EnumTest>);", dataTableProcessor.GetName(i), languageKeyword).AppendLine();
                     }
                     else {
-                        //List<Vector2> v = DataTableExtension.ParseList<Vector2>(columnTexts[index++], DataTableExtension.ParseVector2);
                         stringBuilder.AppendFormat("            {0} = DataTableExtension.ParseList<{1}>(columnTexts[index++], DataTableExtension.Parse{2});", dataTableProcessor.GetName(i), dataTableProcessor.GetType(i).Name, dataTableProcessor.GetType(i).Name).AppendLine();
 
                     }
                 }
-                else if (dataTableProcessor.IsSystem(i))
+                else if (dataTableProcessor.IsSystem(i) || dataTableProcessor.IsCustom(i))
                 {
                     
                     if (languageKeyword == "string")
@@ -262,12 +261,13 @@ namespace StarForce.Editor.DataTableTools2
 
                 if (dataTableProcessor.IsList(i))
                 {
-                    if (dataTableProcessor.IsSystem(i))
-                    {
+                    //if (dataTableProcessor.IsSystem(i) || dataTableProcessor.IsCustom(i))
+                    //{
 
-                        stringBuilder.AppendFormat("                    {0} = binaryReader.ReadList<{1}>(binaryReader.Read{2});", dataTableProcessor.GetName(i), languageKeyword, dataTableProcessor.GetType(i).Name).AppendLine();
-                    }
-                    else if (dataTableProcessor.GetValueType(i) == DataType.Enum)
+                    //    stringBuilder.AppendFormat("                    {0} = binaryReader.ReadList<{1}>(binaryReader.Read{2});", dataTableProcessor.GetName(i), languageKeyword, dataTableProcessor.GetType(i).Name).AppendLine();
+                    //}
+                    //else
+                    if (dataTableProcessor.GetValueType(i) == DataType.Enum)
                     {
                         stringBuilder.AppendFormat("                    {0} = binaryReader.ReadList<{1}>(binaryReader.ReadInt32);", dataTableProcessor.GetName(i), languageKeyword).AppendLine();
 
